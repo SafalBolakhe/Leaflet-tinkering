@@ -1,0 +1,245 @@
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+crossorigin="" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<style>
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+    width: 100%;
+    height: 80vh;
+}
+#test
+{
+    border-radius: 1px;
+    margin-top: -110px;
+    z-index: 1234;
+    position: absolute;
+    right:10px;
+    align-content: right !important;
+    background-color: black;
+}
+@media screen and (max-width: 649px){
+#map{
+    height: 65vh;
+}
+}
+</style>
+<div id="map"></div>
+<button id = "test"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin=""></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<script>
+var map_init = L.map('map').setView([27.71366654169551, 85.31476696392365], 18);
+
+var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.'
+}).addTo(map_init);
+
+//L.Control.geocoder().addTo(map_init);
+document.getElementById("test").onclick = function(){bounder()};
+var options = {
+    enableHighAccuracy: true
+}
+
+navigator.geolocation.getCurrentPosition(success, error, options);
+
+function success(pos) {
+    setInterval(() => {
+        navigator.geolocation.getCurrentPosition(getPosition)
+        }, 1000);
+}
+
+function error(err) {
+    alert("Map will not be dynamic if you disable location, please enable location access for better experience.")
+    lat = 27.713737089225756
+    long = 85.31514582222397
+    maker();
+}
+
+
+//document.getElementById("close").onclick = function() {myClose()}
+
+//function myClose(){
+    //var y = document.getElementById("thamel");
+   // console.log("clicked")
+    //    y.style.display = "none";
+// }
+
+
+
+var thamel_gate, tridevi, ashok_stupa, chibahal, geo, lat, long, accuracy, geo_outline, geo_radius, id;
+
+    thamel_gate = L.marker([27.71366654169551, 85.31476696392365])
+    thamel_gate.on('click', myThamel);
+
+    tridevi = L.marker([27.71383334762338, 85.31378747119057])
+    tridevi.on('click', trideviF);
+
+    ashok_stupa = L.marker([27.71255544935183, 85.31164355040097])
+    ashok_stupa.on('click', ashok);
+
+    chibahal = L.marker([27.71063046773016, 85.31198338481205])
+    chibahal.on('click', chibahalF);
+
+    maitripur_mahabihar = L.marker([27.711153947118206, 85.31083827683992])
+    maitripur_mahabihar.on('click', mahabihar);
+
+
+    dabali_chowk = L.marker([27.715140671709335, 85.31140049420173])
+    dabali_chowk.on('click', dabali);
+
+    bhimsen_pati = L.marker([27.714918238897607, 85.31253592803989])
+    bhimsen_pati.on('click', bhimsen);
+
+    bhagwan_bahal = L.marker([27.715651501564604, 85.31260385685937])
+    bhagwan_bahal.on('click', bhagwanBahal);
+
+    bhagwati_temple = L.marker([27.71601330615741, 85.31150483969526])
+    bhagwati_temple.on('click', bhagwatiTemple);
+
+    gaahiti = L.marker([27.71722323187925, 85.31286327050259])
+    gaahiti.on('click', gaahitiF);
+
+
+    saat_ghumti = L.marker([27.715952843224336, 85.3101242665762])
+    saat_ghumti.on('click', saatGhumti);
+    mona = L.marker([27.715324636948377, 85.30933934424986])
+    mona.on('click', monaf);
+
+    kgh = L.marker([27.7151773734047, 85.3095143574676])
+    kgh.on('click', kghf);
+
+
+    function myThamel(){
+        id = "thamel_gate"
+        myFunction()
+    }
+    function trideviF(){
+        id = "tridevi"
+        myFunction()
+    }
+    function ashok(){
+        id = "ashok"
+        myFunction()
+    }
+    function chibahalF(){
+        id = "chibahal"
+        myFunction()
+    }
+    function mahabihar(){
+        id = "mahabihar"
+        myFunction()
+    }
+    function dabali(){
+        id = "dabali"
+        myFunction()
+    }
+    function bhimsen(){
+        id = "bhimsen"
+        myFunction()
+    }
+    function bhagwanBahal(){
+        id = "bhagwanBahal"
+        myFunction()
+    }
+    function bhagwatiTemple(){
+        id = "bhagwatiTemple"
+        myFunction()
+    }
+    function gaahitiF(){
+        id = "gaahiti"
+        myFunction()
+    }
+    function saatGhumti(){
+        id = "saatGhumti"
+        myFunction()
+    }
+    function monaf(){
+        id = "mona"
+        myFunction()
+    }
+    function kghf(){
+        id = "kgh"
+        myFunction()
+    }
+    
+    
+    // function myFunction() {
+    // var x = document.getElementById(id);
+    //     if (x.style.display == "block")
+    //     {
+    //         x.style.display = "none"
+    //         x.style.transition = "all 1s"
+    //     }  else {
+    //         x.style.display = "block"
+    //     }
+    function myFunction() {
+    var x = document.getElementById(id);
+       alert(id);
+}
+
+    
+
+function getPosition(position) {
+    //console.log(position)
+    lat = position.coords.latitude
+    long = position.coords.longitude
+    accuracy = position.coords.accuracy
+    maker();
+}
+
+function maker()
+{
+
+
+    if (thamel_gate) {
+        map_init.removeLayer(thamel_gate)
+    }
+    if (geo) {
+        map_init.removeLayer(geo)
+    }
+
+    if (geo_outline) {
+        map_init.removeLayer(geo_outline)
+    }
+
+    if (geo_radius) {
+        map_init.removeLayer(geo_radius)
+    }
+
+
+    geo_radius = L.circleMarker([lat, long], { 
+        radius: 60,
+        fillColor:'#add8e6',
+        fillOpacity: 0.4
+     })
+
+
+    geo = L.circleMarker([lat, long], { radius: 13 })
+
+    geo_outline = L.circleMarker([lat, long], {
+        color: 'lightblue',
+        fillColor: '#add8e6',
+        fillOpacity: 1,
+        radius: 10
+    })
+
+    var featureGroup = L.featureGroup([thamel_gate, tridevi, ashok_stupa, chibahal, maitripur_mahabihar, dabali_chowk, bhimsen_pati, bhagwan_bahal, bhagwati_temple, gaahiti, saat_ghumti, mona, kgh, geo, geo_outline, geo_radius]).addTo(map_init)
+
+    //console.log("Your coordinate is: Lat: " + lat + " Long: " + long + " Accuracy: " + accuracy)
+}
+function bounder()
+{
+geo_temp = L.circleMarker([lat, long], { radius: 13 })
+var fg = L.featureGroup([geo_temp])
+//map_init.fitBounds(fg.getBounds())
+map_init.flyToBounds(fg.getBounds(), {'duration':0.8})
+}
+
+</script>
